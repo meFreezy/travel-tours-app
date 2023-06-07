@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('tours', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('travel-id');
-            $table->date('start-date')->nullable();
-            $table->date('end-date')->nullable();
+            $table->unsignedBigInteger('travel_id');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->unsignedBigInteger('price');
             $table->timestamps();
 
-            $table->foreign('travel-id')->references('id')->on('travels')->nullableOnDelete()->cascadeOnUpdate();
+            $table->foreign('travel_id')->references('id')->on('travels')->nullableOnDelete()->cascadeOnUpdate();
         });
     }
 
