@@ -14,15 +14,16 @@ return new class extends Migration
         /**
          * The initial requirement stated that travels would contain information such as  the number of days, the images, title. This probably means we may need an 'image' column later on for local storage of our travel images.
          */
+        // travel is a noun without a plural form / same form is used, so the name of the table will be 'travel', not 'travels'
+        // you can tinker str('travel')->plural() to double check
         Schema::create('travels', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->boolean('is_public');
-            $table->string('slug');
+            $table->uuid(column: 'id')->primary();
+            $table->boolean('is_public')->default(false);
+            $table->string('slug')->unique();
             $table->string('name');
             $table->text('description');
             $table->unsignedInteger('number_of_days');
-            $table->unsignedInteger('number_of_nights');
+            $table->timestamps();
         });
     }
 

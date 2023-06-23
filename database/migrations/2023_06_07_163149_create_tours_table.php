@@ -12,15 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tours', function (Blueprint $table) {
-            $table->id();
+            $table->uuid(column: 'id')->primary();
+            $table->foreignUuid(column: 'travel_id')->constrained(table: 'travels');
             $table->string('name');
-            $table->unsignedBigInteger('travel_id');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->unsignedBigInteger('price');
             $table->timestamps();
-
-            $table->foreign('travel_id')->references('id')->on('travels')->nullableOnDelete()->cascadeOnUpdate();
         });
     }
 
